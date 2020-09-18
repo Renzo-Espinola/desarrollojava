@@ -6,3 +6,5 @@ output/
 target/
 # Ignore file named '*.iml'
 *.iml
+# Ignore folder named '.idea'
+.idea/
