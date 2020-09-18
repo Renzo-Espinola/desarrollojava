@@ -4,4 +4,5 @@ README.txt
 output/
 # Ignore folder named 'target'
 target/
-# Ignore file named '*.lml'
+# Ignore file named '*.iml'
+*.iml
