@@ -1,0 +1,8 @@
+# Ignore file named 'README.txt'
+README.txt
+# Ignore folder named 'output'
+output/
+# Ignore folder named 'target'
+target/
+# Ignore file named '*.iml'
+*.iml
