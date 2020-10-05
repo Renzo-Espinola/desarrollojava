@@ -1,7 +1,5 @@
 package mx.com.gm.peliculas.test;
 
-import mx.com.gm.peliculas.datos.AccesoDatosImpl;
-import mx.com.gm.peliculas.datos.IAccesoDatos;
 import mx.com.gm.peliculas.domain.Pelicula;
 import mx.com.gm.peliculas.excepciones.EscrituraDatosEx;
 import mx.com.gm.peliculas.excepciones.LecturaDatosEx;

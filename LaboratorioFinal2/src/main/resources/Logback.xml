@@ -6,7 +6,7 @@
         </encoder>
     </appender>
 
-    <appender name="error" class="mx.com.gm.peliculas.datos.AccesoDatosImpl">
+    <appender name="error" class="mx.com.gm.peliculas.datos.AccesoDatosFileImpl">
         <file>myApp.log</file>
         <encoder>
             <pattern>%date %level [%thread] %logger{10} [%file:%line] %msg%n</pattern>

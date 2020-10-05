@@ -1,6 +1,5 @@
 package mx.com.gm.peliculas.test;
-import java.util.ArrayList.*;
-import mx.com.gm.peliculas.datos.AccesoDatosImpl;
+import mx.com.gm.peliculas.datos.AccesoDatosFileImpl;
 import mx.com.gm.peliculas.datos.IAccesoDatos;
 import mx.com.gm.peliculas.domain.Pelicula;
 import mx.com.gm.peliculas.excepciones.EscrituraDatosEx;
@@ -13,9 +12,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
 
-class AccesoDatosImplTest extends AccesoDatosImpl {
+class AccesoDatosImplTest extends AccesoDatosFileImpl {
     File archivo = new File ("src\\main\\resources\\peliculas.txt");
     String nombreArchivo= archivo.getAbsolutePath();
     IAccesoDatos accesoDatos;
@@ -25,7 +23,7 @@ class AccesoDatosImplTest extends AccesoDatosImpl {
     @BeforeEach
     public void before() {
         System.out.println("BEFORE");
-        accesoDatos = new AccesoDatosImpl(nombreArchivo);
+        accesoDatos = new AccesoDatosFileImpl(nombreArchivo);
         peli = new Pelicula("xFiles");
 
     }
@@ -50,14 +48,14 @@ class AccesoDatosImplTest extends AccesoDatosImpl {
     public void testEscribirPelicula() throws EscrituraDatosEx {
         System.out.println("testAgregarPelicula");
         assertThat(accesoDatos.escribir(peli,true))
-                .isEmpty();
+                .isTrue();
     }
 
     @Test
     public void testNoEscribirPelicula() throws EscrituraDatosEx {
         System.out.println("testNoAgregarPelicula");
         assertThat(accesoDatos.escribir(peli, false))
-                .isEmpty();
+                .isFalse();
     }
 
 
@@ -75,8 +73,8 @@ class AccesoDatosImplTest extends AccesoDatosImpl {
         List<Pelicula> pelicula= new ArrayList<>();
         pelicula.add(new Pelicula("batman"));
         String opcion = "batman";
-        assertThat(accesoDatos.borrar(pelicula,opcion))
-                .isEmpty();
+        assertThat(accesoDatos.borrar(opcion))
+                .isTrue();
 
     }
     @Test
@@ -85,8 +83,8 @@ class AccesoDatosImplTest extends AccesoDatosImpl {
         List<Pelicula> pelicula= new ArrayList<>();
         pelicula.add(new Pelicula("batman"));
         String opcion = "batman";
-        assertThat(accesoDatos.borrar(pelicula,opcion))
-                .isNotEmpty();
+        assertThat(accesoDatos.borrar(opcion))
+                .isFalse();
 
     }
     @Test
