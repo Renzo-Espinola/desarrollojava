@@ -1,7 +1,6 @@
 package mx.com.gm.peliculas.test;
 
-import mx.com.gm.peliculas.datos.AccesoDatosImpl;
-import mx.com.gm.peliculas.datos.IAccesoDatos;
+import mx.com.gm.peliculas.config.Configuracion;
 import mx.com.gm.peliculas.domain.Pelicula;
 import mx.com.gm.peliculas.excepciones.EscrituraDatosEx;
 import mx.com.gm.peliculas.excepciones.LecturaDatosEx;
@@ -11,6 +10,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.io.File;
+import java.io.ObjectInputFilter;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
@@ -21,6 +21,8 @@ class CatalogoPeliculasImpTest extends CatalogoPeliculasImp {
     String nombreArchivo= archivo.getAbsolutePath();
     ICatalogoPeliculas catalogoPeliculas;
     Pelicula peli;
+    String conf = Configuracion.FILE_CAT_PELICULA;
+
 
 
     @BeforeEach
@@ -37,7 +39,7 @@ class CatalogoPeliculasImpTest extends CatalogoPeliculasImp {
         String esperado ="Se ha agregado ";
 
         System.out.println("testAgregarPeliculas");
-        assertEquals(esperado,catalogoPeliculas.agregarPelicula(pelicula,true));
+        assertEquals(esperado,catalogoPeliculas.agregarPelicula(pelicula,conf ,true));
 
     }
     @Test
@@ -45,12 +47,12 @@ class CatalogoPeliculasImpTest extends CatalogoPeliculasImp {
         String pelicula = "startrek";
         String esperado ="Ocurrio un error al agregar ";
         System.out.println("testNoAgregarPeliculas");
-        assertEquals(esperado, (catalogoPeliculas.agregarPelicula(pelicula,false)));
+        assertEquals(esperado, (catalogoPeliculas.agregarPelicula(pelicula,conf,true)));
     }
     @Test
     public void testListarCatalogo()throws LecturaDatosEx, EscrituraDatosEx {
         String esperado = "1- batman";
-        catalogoPeliculas.agregarPelicula("batman",true);
+        catalogoPeliculas.agregarPelicula("batman",conf,true);
         System.out.println("testListarCatalogo");
         assertThat(catalogoPeliculas.listarPeliculas()).hasToString(esperado);
     }

@@ -1,20 +1,20 @@
 package mx.com.gm.peliculas.negocio;
-import mx.com.gm.peliculas.datos.AccesoDatosHmImp;
+
 
 import mx.com.gm.peliculas.domain.Pelicula;
+import mx.com.gm.peliculas.domain.Socio;
 import mx.com.gm.peliculas.excepciones.*;
 import mx.com.gm.peliculas.datos.*;
 
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
 
-import org.apache.commons.compress.compressors.zstandard.ZstdCompressorOutputStream;
+import java.util.Iterator;
+
+
 import org.slf4j.LoggerFactory;
 import org.slf4j.Logger;
 
 public class CatalogoPeliculasImp implements ICatalogoPeliculas {
-    private List<Pelicula> resguardo;
+
     private String nombreArchivo;
     private IAccesoDatos catalogo;
     private IAccesoDatos catalogoHmap;
@@ -22,24 +22,16 @@ public class CatalogoPeliculasImp implements ICatalogoPeliculas {
     private static Logger logger = LoggerFactory.getLogger(CatalogoPeliculasImp.class);
 
     public CatalogoPeliculasImp() {
-        catalogo= new AccesoDatosImpl();
-        catalogoHmap = new AccesoDatosHmImp();
+        //catalogo= new AccesoDatosListImp();
+        //catalogo= new AccesoDatosHmImp();
+        catalogo= new AccesoDatosFileImpl();
     }
 
     @Override
-    public String agregarPelicula(String pelicula, boolean bandera) throws EscrituraDatosEx {
+    public String agregarPelicula(String pelicula, String file, boolean bandera) throws EscrituraDatosEx {
 
         Pelicula pelicula1 = new Pelicula(pelicula);
-        resguardo = catalogo.escribir(pelicula1,true);
-        return ("Se ha agregado correctamente");
-        }
-    @Override
-    public String agregarPeliculaHmap(Integer indice, String pelicula, boolean bandera) throws EscrituraDatosEx {
-
-        Pelicula pelicula1 = new Pelicula(pelicula);
-        HashMap agPeliHmap = new HashMap<>();
-        agPeliHmap.put(indice,pelicula1.getNombre());
-        if (catalogoHmap.escribirHmap(indice,agPeliHmap,bandera) == true) {
+        if (catalogo.escribir(pelicula1, file,  bandera) == true) {
             return ( "Se ha agregado ");
 
         } else {
@@ -47,62 +39,27 @@ public class CatalogoPeliculasImp implements ICatalogoPeliculas {
         }
 
     }
-    /*@Override
+
+    @Override
     public String listarPeliculas() throws LecturaDatosEx {
-        IAccesoDatos catalogo = new AccesoDatosImpl();
         int i = 0;
         int j = 1;
         //catalogo.listar(nombreArchivo);
         System.out.println("LISTADO DE PELICULAS");
 
-        Iterator iter = catalogo.listarFile().iterator();
+        Iterator iter = catalogo.listar().iterator();
         while (iter.hasNext()) {
 
-            System.out.println(j + "- " + catalogo.listarFile().get(i).getNombre());
+            System.out.println(j + "- " + catalogo.listar().get(i).getNombre());
             iter.next();
             i++;
             j++;
         }
-        return("");
-    }*/
-
-    @Override
-    public String listarPeliculas() {
-        IAccesoDatos catalogo = new AccesoDatosImpl();
-        int i = 0;
-        int j = 1;
-        //catalogo.listar(nombreArchivo);
-        System.out.println("LISTADO DE PELICULAS");
-
-        Iterator iter = resguardo.iterator();
-        while (iter.hasNext()) {
-
-            System.out.println(j + "- " + resguardo.get(i).getNombre());
-            iter.next();
-            i++;
-            j++;
-        }
-        return("");
-    }
-    @Override
-    public String listarPeliculasHmap() throws LecturaDatosEx {
-        IAccesoDatos catalogo = new AccesoDatosHmImp();
-        int i = 0;
-        //catalogo.listar(nombreArchivo);
-        System.out.println("LISTADO DE PELICULAS");
-
-       Iterator iter = catalogo.listarHmap().values().iterator();
-        while (iter.hasNext()) {
-            System.out.println(catalogo.listarHmap().get(i).getNombre());
-            iter.next();
-            i++;
-        }
-        return("");
-    }
+        return("");}
 
     @Override
     public String buscarPelicula(String buscar) throws LecturaDatosEx {
-        IAccesoDatos catalogo = new AccesoDatosImpl(nombreArchivo);
+
         if (catalogo.buscar(buscar) == true) {
             return ("El titulo se encuentra en el catalogo");
         } else {
@@ -113,7 +70,7 @@ public class CatalogoPeliculasImp implements ICatalogoPeliculas {
 
     @Override
     public String iniciarArchivo() throws EscrituraDatosEx {
-        IAccesoDatos catalogo = new AccesoDatosImpl(nombreArchivo);
+
         if (catalogo.crear() == true) {
             catalogo.crear();
             return  ("Se ha creado un nuevo nuevo catalogo");
@@ -122,34 +79,71 @@ public class CatalogoPeliculasImp implements ICatalogoPeliculas {
         }
 
     }
-    @Override
-    public String iniciarArchivoHmap() throws EscrituraDatosEx {
-        IAccesoDatos catalogo = new AccesoDatosHmImp(nombreArchivo);
-        if (catalogo.crearHmap() == true
-        ) {
-            catalogo.crearHmap();
-            return  ("Se ha creado un nuevo nuevo catalogo");
-        } else {
-            return ("Se predujo un error al crear un nuevo catalogo");
-        }
 
-    }
 
     @Override
     public String borrarPelicula(String opcion) throws EscrituraDatosEx, LecturaDatosEx {
-        int i = 0;
         String resp= "";
-        IAccesoDatos catalogo = new AccesoDatosImpl();
-
-        if (listarPeliculas().equals(opcion))
-        {resguardo=catalogo.borrar(resguardo, opcion);
+        if (opcion!=""){
+        catalogo.borrar(opcion);
         resp=("Se ha borrado el catalogo de pelicula");
             } else {
-
-        resp = ("Se produjo un error en el  borrado del catalogo");
+            resp = ("Se produjo un error en el  borrado del catalogo");
                 }
 
         return resp;
     }
+
+    @Override
+    public String agregarSocio(String socio) throws EscrituraDatosEx {
+        Socio socio1 = new Socio(socio);
+        if (catalogo.agregarSocio(socio1,true) == true) {
+            return ( "Se ha agregado ");
+
+        } else {
+            return ("Ocurrio un error al agregar ");
+        }
+
+    }
+    @Override
+    public String listarSocios() throws LecturaDatosEx {
+        int i = 0;
+        int j = 1;
+        //catalogo.listar(nombreArchivo);
+        System.out.println("LISTADO DE SOCIOS");
+
+        Iterator iter = catalogo.listarSocios().iterator();
+        while (iter.hasNext()) {
+
+            System.out.println(j + "- " + catalogo.listarSocios().get(i).getNombre());
+            iter.next();
+            i++;
+            j++;
+        }
+        return("");}
+
+    @Override
+    public String buscarSocio(String buscar) throws LecturaDatosEx {
+        if (catalogo.buscarSocio(buscar) == true) {
+            return ("el usuario se encuentra guardado ");
+        }else{
+            return ("el usuario no se encuentra guardado ");
+            }
+        }
+
+
+    @Override
+    public String borrarSocio(String opcion) throws EscrituraDatosEx,LecturaDatosEx {
+        String resp= "";
+        if (opcion!=""){
+            catalogo.borrarSocio(opcion);
+            resp=("Se ha borrado el catalogo de pelicula");
+        } else {
+            resp = ("Se produjo un error en el  borrado del catalogo");
+        }
+
+        return resp;
+    }
+
 
 }

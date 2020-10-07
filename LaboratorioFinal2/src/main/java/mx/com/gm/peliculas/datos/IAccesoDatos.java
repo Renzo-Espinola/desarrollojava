@@ -1,6 +1,7 @@
 package mx.com.gm.peliculas.datos;
 
 import mx.com.gm.peliculas.domain.Pelicula;
+import mx.com.gm.peliculas.domain.Socio;
 import mx.com.gm.peliculas.excepciones.EscrituraDatosEx;
 import mx.com.gm.peliculas.excepciones.LecturaDatosEx;
 
@@ -11,28 +12,21 @@ public interface IAccesoDatos {
 
     boolean existe () throws LecturaDatosEx;
 
-    List<Pelicula> listarFile () throws LecturaDatosEx;
+    List<Pelicula> listar()throws LecturaDatosEx;
 
-    List<Pelicula>listar();
-
-    List<Pelicula> escribir (Pelicula pelicula, boolean anexar) throws EscrituraDatosEx;
+    boolean escribir (Pelicula pelicula, String file, boolean anexar) throws EscrituraDatosEx;
 
     boolean buscar (String buscar) throws LecturaDatosEx;
 
     boolean crear () throws EscrituraDatosEx;
 
-    List<Pelicula> borrar (List<Pelicula> peliculas,String opcion) throws EscrituraDatosEx,LecturaDatosEx;
+    boolean borrar (String opcion) throws EscrituraDatosEx,LecturaDatosEx;
 
+    boolean agregarSocio(Socio socio,boolean anexar) throws EscrituraDatosEx;
 
-    boolean existeHmap() throws LecturaDatosEx;
+    List<Socio> listarSocios()throws LecturaDatosEx;
 
-    HashMap<Integer, Pelicula> listarHmap() throws LecturaDatosEx;
+    boolean buscarSocio (String buscar) throws LecturaDatosEx;
 
-    boolean escribirHmap(Integer indice, HashMap hashMapPeliculas, boolean anexar) throws EscrituraDatosEx;
-
-    boolean buscarHmap(String buscar) throws LecturaDatosEx;
-
-    boolean crearHmap() throws EscrituraDatosEx;
-
-    boolean borrarHmap() throws EscrituraDatosEx;
+    boolean borrarSocio (String buscar) throws EscrituraDatosEx, LecturaDatosEx;
 }
