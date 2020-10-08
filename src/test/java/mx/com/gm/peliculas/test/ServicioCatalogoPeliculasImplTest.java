@@ -5,7 +5,7 @@ import mx.com.gm.peliculas.domain.Pelicula;
 import mx.com.gm.peliculas.excepciones.EscrituraDatosEx;
 import mx.com.gm.peliculas.excepciones.LecturaDatosEx;
 import mx.com.gm.peliculas.negocio.IServicioCatalogoPeliculas;
-import mx.com.gm.peliculas.negocio.ServicioCatalogoPeliculasImp;
+import mx.com.gm.peliculas.negocio.ServicioCatalogoPeliculasImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -14,7 +14,7 @@ import java.io.File;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
 
-class ServicioCatalogoPeliculasImpTest extends ServicioCatalogoPeliculasImp {
+class ServicioCatalogoPeliculasImplTest extends ServicioCatalogoPeliculasImpl {
 
     File archivo = new File ("src\\main\\resources\\peliculas.txt");
     String nombreArchivo= archivo.getAbsolutePath();
@@ -27,7 +27,7 @@ class ServicioCatalogoPeliculasImpTest extends ServicioCatalogoPeliculasImp {
     @BeforeEach
     public void before() throws EscrituraDatosEx{
         System.out.println("BEFORE");
-        catalogoPeliculas = new ServicioCatalogoPeliculasImp();
+        catalogoPeliculas = new ServicioCatalogoPeliculasImpl();
         peli = new Pelicula("xFiles");
         catalogoPeliculas.iniciarArchivo();
 
@@ -38,7 +38,7 @@ class ServicioCatalogoPeliculasImpTest extends ServicioCatalogoPeliculasImp {
         String esperado ="Se ha agregado ";
 
         System.out.println("testAgregarPeliculas");
-        assertEquals(esperado,catalogoPeliculas.agregarPelicula(pelicula,conf ,true));
+        assertEquals(esperado,catalogoPeliculas.agregarPelicula(pelicula,true));
 
     }
     @Test
@@ -46,12 +46,12 @@ class ServicioCatalogoPeliculasImpTest extends ServicioCatalogoPeliculasImp {
         String pelicula = "startrek";
         String esperado ="Ocurrio un error al agregar ";
         System.out.println("testNoAgregarPeliculas");
-        assertEquals(esperado, (catalogoPeliculas.agregarPelicula(pelicula,conf,true)));
+        assertEquals(esperado, (catalogoPeliculas.agregarPelicula(pelicula,true)));
     }
     @Test
     public void testListarCatalogo()throws LecturaDatosEx, EscrituraDatosEx {
         String esperado = "1- batman";
-        catalogoPeliculas.agregarPelicula("batman",conf,true);
+        catalogoPeliculas.agregarPelicula("batman",true);
         System.out.println("testListarCatalogo");
         assertThat(catalogoPeliculas.listarPeliculas()).hasToString(esperado);
     }

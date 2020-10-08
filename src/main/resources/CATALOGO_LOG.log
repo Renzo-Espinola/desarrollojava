@@ -1,5 +1,5 @@
-2020-09-27 20:23:45,685 INFO mx.com.gm.peliculas.negocio.ServicioCatalogoPeliculasImp [main] 1- batman
-2020-09-27 20:23:45,716 INFO mx.com.gm.peliculas.negocio.ServicioCatalogoPeliculasImp [main] 2- hulk
-2020-09-27 20:23:45,716 INFO mx.com.gm.peliculas.negocio.ServicioCatalogoPeliculasImp [main] 3- batman
-2020-09-27 20:23:45,716 INFO mx.com.gm.peliculas.negocio.ServicioCatalogoPeliculasImp [main] 4- spiderman
-2020-09-27 20:23:45,716 INFO mx.com.gm.peliculas.negocio.ServicioCatalogoPeliculasImp [main] 5- hulk
+2020-09-27 20:23:45,685 INFO mx.com.gm.peliculas.negocio.ServicioCatalogoPeliculasImpl [main] 1- batman
+2020-09-27 20:23:45,716 INFO mx.com.gm.peliculas.negocio.ServicioCatalogoPeliculasImpl [main] 2- hulk
+2020-09-27 20:23:45,716 INFO mx.com.gm.peliculas.negocio.ServicioCatalogoPeliculasImpl [main] 3- batman
+2020-09-27 20:23:45,716 INFO mx.com.gm.peliculas.negocio.ServicioCatalogoPeliculasImpl [main] 4- spiderman
+2020-09-27 20:23:45,716 INFO mx.com.gm.peliculas.negocio.ServicioCatalogoPeliculasImpl [main] 5- hulk

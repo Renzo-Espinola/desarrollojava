@@ -18,14 +18,14 @@ class AccesoDatosImplTest extends AccesoDatosFileImpl {
     File archivo = new File ("src\\main\\resources\\peliculas.txt");
     String nombreArchivo= archivo.getAbsolutePath();
     IAccesoDatos accesoDatos;
-    Pelicula peli;
+    String peli;
     String conf = Configuracion.FILE_CAT_PELICULA;
 
     @BeforeEach
     public void before() {
         System.out.println("BEFORE");
         accesoDatos = new AccesoDatosFileImpl(nombreArchivo);
-        peli = new Pelicula("xFiles");
+        peli = "xFiles";
 
     }
 
@@ -48,14 +48,14 @@ class AccesoDatosImplTest extends AccesoDatosFileImpl {
     @Test
     public void testEscribirPelicula() throws EscrituraDatosEx {
         System.out.println("testAgregarPelicula");
-        assertThat(accesoDatos.escribir(peli,conf,true))
+        assertThat(accesoDatos.escribir(peli,true))
                 .isTrue();
     }
 
     @Test
     public void testNoEscribirPelicula() throws EscrituraDatosEx {
         System.out.println("testNoAgregarPelicula");
-        assertThat(accesoDatos.escribir(peli,conf, false))
+        assertThat(accesoDatos.escribir(peli, false))
                 .isFalse();
     }
 

@@ -2,6 +2,7 @@ package mx.com.gm.peliculas.datos;
 
 import mx.com.gm.peliculas.domain.Pelicula;
 import mx.com.gm.peliculas.domain.Socio;
+import mx.com.gm.peliculas.excepciones.AccesoDatosEx;
 import mx.com.gm.peliculas.excepciones.EscrituraDatosEx;
 import mx.com.gm.peliculas.excepciones.LecturaDatosEx;
 import org.slf4j.Logger;
@@ -11,12 +12,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class AccesoDatosListImp implements IAccesoDatos {
+    private String nombre;
     private boolean bandera = true;
     private List<Pelicula> resguardoPelicula = new ArrayList<>();
-    private List<Pelicula> listaPelicula = new ArrayList<>();
-    private List<Socio> listaSocio = new ArrayList<>();
+    private List<String> listaPelicula = new ArrayList<>();
+    private List<String> listaSocio = new ArrayList<>();
     private static Logger logger = LoggerFactory.getLogger(AccesoDatosFileImpl.class);
 
+    public AccesoDatosListImp(String nombre){
+   this.nombre=nombre;
+    }
 
     @Override
     public boolean existe() throws LecturaDatosEx {
@@ -24,16 +29,16 @@ public class AccesoDatosListImp implements IAccesoDatos {
     }
 
     @Override
-    public List<Pelicula> listar() throws LecturaDatosEx {
+    public List<String> listar() throws LecturaDatosEx {
 
         return listaPelicula;
     }
 
     @Override
-    public boolean escribir(Pelicula pelicula, String file, boolean anexar) throws EscrituraDatosEx {
+    public boolean escribir(String nombre, boolean anexar) throws EscrituraDatosEx {
 
-        if (pelicula != null && anexar != false) {
-            listaPelicula.add(pelicula);
+        if (nombre != "" && anexar != false) {
+            listaPelicula.add(nombre);
             return true;
         } else
             return false;
@@ -46,7 +51,7 @@ public class AccesoDatosListImp implements IAccesoDatos {
     public boolean buscar(String buscar) throws LecturaDatosEx {
 
         for (int i = 0; i < listaPelicula.size(); i++) {
-            if (listaPelicula.get(i).getNombre().equalsIgnoreCase(buscar)) {
+            if (listaPelicula.get(i).equalsIgnoreCase(buscar)) {
                 bandera = true;
                 break;
             } else bandera = false;
@@ -62,7 +67,7 @@ public class AccesoDatosListImp implements IAccesoDatos {
     @Override
     public boolean borrar(String opcion) throws EscrituraDatosEx, LecturaDatosEx {
         for (int i = 0; i < listaPelicula.size(); i++) {
-            if (listaPelicula.get(i).getNombre().equalsIgnoreCase(opcion)) {
+            if (listaPelicula.get(i).equalsIgnoreCase(opcion)) {
                 listaPelicula.remove(i);
                 bandera = true;
                 break;
@@ -71,15 +76,15 @@ public class AccesoDatosListImp implements IAccesoDatos {
         return bandera;
     }
 
-    @Override
-    public boolean agregarSocio(Socio socio, boolean anexar) throws EscrituraDatosEx {
+    /*@Override
+    public boolean agregarSocio(String socio, boolean anexar) throws EscrituraDatosEx {
         if (socio != null && anexar == true) {
             listaSocio.add(socio);
             return true;
         } else return false;
     }
 
-    @Override
+   /* @Override
     public List<Socio> listarSocios() throws LecturaDatosEx {
         return listaSocio;
     }
@@ -105,5 +110,5 @@ public class AccesoDatosListImp implements IAccesoDatos {
             }else bandera= false;
         }
         return bandera;
-    }
+    }*/
 }
