@@ -14,16 +14,18 @@ import java.util.LinkedHashMap;
 
 public class AccesoDatosHmImp implements IAccesoDatos {
     private Pelicula nombrePeli = new Pelicula();
-    private  Map<Integer,Pelicula> mapPelis = new HashMap<>();
+    private  Map<Integer,String> mapPelis = new HashMap<>();
     private  Map<Integer,Socio> mapSocios = new HashMap<>();
     private Integer i=0;
     private boolean bandera = true;
-
+    private String nombre;
 
 
     private static Logger logger = LoggerFactory.getLogger(AccesoDatosFileImpl.class);
 
-    public AccesoDatosHmImp(){}
+    public AccesoDatosHmImp(String nombre){
+    this.nombre=nombre;
+    }
 
 
 
@@ -40,19 +42,19 @@ public class AccesoDatosHmImp implements IAccesoDatos {
 
 
     @Override
-    public  List<Pelicula> listar ()throws LecturaDatosEx {
+    public  List<String> listar ()throws LecturaDatosEx {
 
-        List<Pelicula> resguardoPelicula = new ArrayList<Pelicula>(mapPelis.values());
+        List<String> resguardoPelicula = new ArrayList<>(mapPelis.values());
 
                 return resguardoPelicula;
 
     }
 
     @Override
-    public boolean escribir(Pelicula pelicula,String file , boolean anexar) throws EscrituraDatosEx {
-         if(pelicula!=null &&anexar!=false){
+    public boolean escribir(String nombre , boolean anexar) throws EscrituraDatosEx {
+         if(nombre!="" &&anexar!=false){
 
-             mapPelis.put(i,pelicula);
+             mapPelis.put(i,nombre);
            i++;
            return true;
        }else return false;
@@ -62,7 +64,7 @@ public class AccesoDatosHmImp implements IAccesoDatos {
     @Override
     public boolean buscar(String buscar) throws LecturaDatosEx {
         for (int i =0;i<mapPelis.size();i++){
-            if (mapPelis.get(i).getNombre().equalsIgnoreCase(buscar)){
+            if (mapPelis.get(i).equalsIgnoreCase(buscar)){
                 bandera=true;
                 break;
             }else bandera=false;
@@ -81,7 +83,7 @@ public class AccesoDatosHmImp implements IAccesoDatos {
     @Override
     public boolean borrar(String opcion) throws EscrituraDatosEx, LecturaDatosEx {
         for (int i =0;i<mapPelis.size();i++){
-            if (mapPelis.get(i).getNombre().equalsIgnoreCase(opcion)){
+            if (mapPelis.get(i).equalsIgnoreCase(opcion)){
                 mapPelis.remove(i);
                 bandera=true;
                 break;
@@ -90,7 +92,7 @@ public class AccesoDatosHmImp implements IAccesoDatos {
         return  bandera;
     }
 
-    @Override
+   /* @Override
     public boolean agregarSocio(Socio socio, boolean anexar) throws EscrituraDatosEx {
         if (socio!=null&&anexar==true){
             mapSocios.put(i,socio);
@@ -100,7 +102,7 @@ public class AccesoDatosHmImp implements IAccesoDatos {
 
     }
 
-    @Override
+    /*@Override
     public List<Socio> listarSocios() throws LecturaDatosEx {
         List<Socio>listSocio=new ArrayList<>(mapSocios.values());
         return listSocio;
@@ -125,6 +127,6 @@ public class AccesoDatosHmImp implements IAccesoDatos {
                 bandera=true;
             }else bandera=false;
         }return bandera;
-    }
+    }*/
 }
 

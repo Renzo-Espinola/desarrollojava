@@ -10,23 +10,23 @@ import java.util.*;
 public interface IAccesoDatos {
 
 
-    boolean existe () throws LecturaDatosEx;
+    boolean existe() throws LecturaDatosEx;
 
-    List<Pelicula> listar()throws LecturaDatosEx;
+    List<String> listar() throws LecturaDatosEx;
 
-    boolean escribir (Pelicula pelicula, String file, boolean anexar) throws EscrituraDatosEx;
+    boolean escribir(String nombre, boolean anexar) throws EscrituraDatosEx;
 
-    boolean buscar (String buscar) throws LecturaDatosEx;
+    boolean buscar(String buscar) throws LecturaDatosEx;
 
-    boolean crear () throws EscrituraDatosEx;
+    boolean crear() throws EscrituraDatosEx;
 
-    boolean borrar (String opcion) throws EscrituraDatosEx,LecturaDatosEx;
+    boolean borrar(String opcion) throws EscrituraDatosEx, LecturaDatosEx;
 
-    boolean agregarSocio(Socio socio,boolean anexar) throws EscrituraDatosEx;
+   /* boolean agregarSocio(Socio socio,boolean anexar) throws EscrituraDatosEx;
 
-    List<Socio> listarSocios()throws LecturaDatosEx;
+      List<Socio> listarSocios()throws LecturaDatosEx;
 
     boolean buscarSocio (String buscar) throws LecturaDatosEx;
 
-    boolean borrarSocio (String buscar) throws EscrituraDatosEx, LecturaDatosEx;
+    boolean borrarSocio (String buscar) throws EscrituraDatosEx, LecturaDatosEx;*/
 }

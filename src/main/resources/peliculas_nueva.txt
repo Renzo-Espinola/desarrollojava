@@ -1,5 +1,6 @@
 gataloca
-atehna
+athena
 renzo
-raul
 tati
+oscar
+juanperez

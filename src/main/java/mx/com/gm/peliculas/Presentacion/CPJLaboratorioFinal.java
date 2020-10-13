@@ -1,9 +1,10 @@
 package mx.com.gm.peliculas.Presentacion;
-import mx.com.gm.peliculas.config.Configuracion;
 import mx.com.gm.peliculas.excepciones.EscrituraDatosEx;
 import mx.com.gm.peliculas.excepciones.LecturaDatosEx;
 import mx.com.gm.peliculas.negocio.IServicioCatalogoPeliculas;
-import mx.com.gm.peliculas.negocio.ServicioCatalogoPeliculasImp;
+import mx.com.gm.peliculas.negocio.IServicioCatalogoSocios;
+import mx.com.gm.peliculas.negocio.ServicioCatalogoPeliculasImpl;
+import mx.com.gm.peliculas.negocio.ServicioCatalogoSociosImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -14,14 +15,10 @@ public class CPJLaboratorioFinal {
 
     public static void main(String[] args) throws EscrituraDatosEx, LecturaDatosEx {
         Integer opcion;
-        String borrar;
-        String ingreso = "";
         String nombrePeli = "";
-        IServicioCatalogoPeliculas catalogoPeliculas = new ServicioCatalogoPeliculasImp();
+        IServicioCatalogoPeliculas servicioPeliculas = new ServicioCatalogoPeliculasImpl();
+        IServicioCatalogoSocios servicioSocios=new ServicioCatalogoSociosImpl();
         Scanner scanner = new Scanner(System.in);
-        String retorno = "si";
-
-        String file = Configuracion.getInstance().getProperty(Configuracion.FILE_CAT_PELICULA);
 
         do {
             System.out.println("---MENU---");
@@ -48,24 +45,24 @@ public class CPJLaboratorioFinal {
                             case 1:
                                 System.out.println("Ingrese el nombre de la pelicula");
                                 nombrePeli = scanner.next();
-                                catalogoPeliculas.agregarPelicula(nombrePeli, file , true);
+                                System.out.println(servicioPeliculas.agregarPelicula(nombrePeli, true));
                                 System.out.println("");
                                 // catalogoPeliculas.listarPeliculas();
                                 break;
                             case 2:
-                                catalogoPeliculas.listarPeliculas();
+                                servicioPeliculas.listarPeliculas();
                                 System.out.println("");
                                 break;
                             case 3:
                                 System.out.println("Ingrese el nombre de la pelicula ");
                                 nombrePeli = scanner.next();
-                                System.out.println(catalogoPeliculas.buscarPelicula(nombrePeli));
+                                System.out.println(servicioPeliculas.buscarPelicula(nombrePeli));
                                 System.out.println("");
                                 break;
                             case 4:
                                 System.out.println("Ingrese el nombre de la pelicula ");
                                 nombrePeli = scanner.next();
-                                System.out.println(catalogoPeliculas.borrarPelicula(nombrePeli));
+                                System.out.println(servicioPeliculas.borrarPelicula(nombrePeli));
                                 System.out.println("");
                                 break;
                             case 0:
@@ -90,23 +87,23 @@ public class CPJLaboratorioFinal {
                             case 1:
                                 System.out.println("Ingrese el nombre del socio");
                                 nombrePeli = scanner.next();
-                                System.out.println(catalogoPeliculas.agregarSocio(nombrePeli));
+                                System.out.println(servicioSocios.agregarSocio(nombrePeli));
                                 System.out.println("");
                                 break;
                             case 2:
-                                catalogoPeliculas.listarSocios();
+                                servicioSocios.listarSocios();
                                 System.out.println("");
                                 break;
                             case 3:
                                 System.out.println("Ingrese el nombre del Socio ");
                                 nombrePeli = scanner.next();
-                                System.out.println(catalogoPeliculas.buscarSocio(nombrePeli));
+                                System.out.println(servicioSocios.buscarSocio(nombrePeli));
                                 System.out.println("");
                                 break;
                             case 4:
                                 System.out.println("Ingrese el nombre del socio ");
                                 nombrePeli = scanner.next();
-                                System.out.println(catalogoPeliculas.borrarSocio(nombrePeli));
+                                System.out.println(servicioSocios.borrarSocio(nombrePeli));
                                 System.out.println("");
                                 break;
                             case 0:
