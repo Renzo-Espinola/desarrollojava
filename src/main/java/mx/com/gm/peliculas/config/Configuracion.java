@@ -13,6 +13,8 @@ public final static String FILE_CAT_PELICULA ="archivoPelicula";
 public final static String FILE_CAT_PElIC_OUT="outputarchivoPelicula";
 public final static String FILE_SOCIO="archivoSocio";
 public final static String FILE_SOCIO_OUT="outputArchivoSocio";
+public final static String FILE_ALQUILER ="archivoAlquiler";
+public final static String FILE_ALQUILER_OUT ="outputArchivoAlquiler";
 
 private Configuracion(){
     this.propiedades=new Properties();

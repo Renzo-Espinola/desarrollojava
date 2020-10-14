@@ -46,7 +46,7 @@
         <appender-ref ref="CATAFILE-ROLLING"/>
     </root>
 
-    <logger name="mx.com.gm.peliculas.Presentacion" additivity="false" level="info">
+    <logger name="mx.com.gm.peliculas.presentacion" additivity="false" level="info">
         <appender-ref ref="CATAFILE-ROLLING" />
         </logger>
 </configuration>
