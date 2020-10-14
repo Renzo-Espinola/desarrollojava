@@ -1,5 +1,9 @@
 package mx.com.gm.peliculas.domain;
 
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter @Setter
 public class Socio {
     private String nombre;
     private int nroSocio;
@@ -11,7 +15,7 @@ public class Socio {
         this.nombre=nombre;
     }
 
-    public String getNombre() {
+    /*public String getNombre() {
         return nombre;
     }
 
@@ -25,7 +29,7 @@ public class Socio {
 
     public void setNroSocio(Integer nroSocio) {
         this.nroSocio = nroSocio;
-    }
+    }*/
 
     @Override
     public String toString() {

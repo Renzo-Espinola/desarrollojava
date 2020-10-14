@@ -1,8 +1,14 @@
 package mx.com.gm.peliculas.domain;
 
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
+
 import java.io.Serializable;
 
-public class Pelicula implements Serializable {
+@Getter @Setter
+
+public class Pelicula {
     private String nombre;
     private int numero;
 
@@ -13,7 +19,7 @@ public class Pelicula implements Serializable {
         this.nombre=nombre;
     }
 
-    public String getNombre() {
+    /*public String getNombre() {
         return nombre;
     }
 
@@ -27,7 +33,7 @@ public class Pelicula implements Serializable {
 
     public void setNombre(String nombre) {
         this.nombre = nombre;
-    }
+    }*/
 
     @Override
     public String toString() {
