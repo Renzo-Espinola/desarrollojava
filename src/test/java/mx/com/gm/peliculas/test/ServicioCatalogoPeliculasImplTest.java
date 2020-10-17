@@ -20,6 +20,7 @@ class ServicioCatalogoPeliculasImplTest extends ServicioCatalogoPeliculasImpl {
     String nombreArchivo= archivo.getAbsolutePath();
     IServicioCatalogoPeliculas catalogoPeliculas;
     Pelicula peli;
+    String pelicula;
     String conf = Configuracion.FILE_CAT_PELICULA;
 
 
@@ -29,6 +30,7 @@ class ServicioCatalogoPeliculasImplTest extends ServicioCatalogoPeliculasImpl {
         System.out.println("BEFORE");
         catalogoPeliculas = new ServicioCatalogoPeliculasImpl();
         peli = new Pelicula("xFiles");
+        pelicula="joker";
         catalogoPeliculas.iniciarArchivo();
 
     }
@@ -38,7 +40,7 @@ class ServicioCatalogoPeliculasImplTest extends ServicioCatalogoPeliculasImpl {
         String esperado ="Se ha agregado ";
 
         System.out.println("testAgregarPeliculas");
-        assertEquals(esperado,catalogoPeliculas.agregarPelicula(pelicula,true));
+        assertEquals(esperado,catalogoPeliculas.agregarPelicula(peli,true));
 
     }
     @Test
@@ -46,12 +48,12 @@ class ServicioCatalogoPeliculasImplTest extends ServicioCatalogoPeliculasImpl {
         String pelicula = "startrek";
         String esperado ="Ocurrio un error al agregar ";
         System.out.println("testNoAgregarPeliculas");
-        assertEquals(esperado, (catalogoPeliculas.agregarPelicula(pelicula,true)));
+        assertEquals(esperado, (catalogoPeliculas.agregarPelicula(peli,true)));
     }
     @Test
     public void testListarCatalogo()throws LecturaDatosEx, EscrituraDatosEx {
         String esperado = "1- batman";
-        catalogoPeliculas.agregarPelicula("batman",true);
+        catalogoPeliculas.agregarPelicula(peli,true);
         System.out.println("testListarCatalogo");
         assertThat(catalogoPeliculas.listarPeliculas()).hasToString(esperado);
     }
@@ -68,7 +70,7 @@ class ServicioCatalogoPeliculasImplTest extends ServicioCatalogoPeliculasImpl {
         String esperado = "El titulo se encuentra en el catalogo";
         String peliculas="batman";
         System.out.println("testBuscarCatalogo");
-        assertEquals(esperado,catalogoPeliculas.buscarPelicula(esperado));
+        assertEquals(esperado,catalogoPeliculas.buscarPelicula(peliculas));
     }
     @Test
     public void testNoBuscarCatalogo()throws LecturaDatosEx {
@@ -95,7 +97,7 @@ class ServicioCatalogoPeliculasImplTest extends ServicioCatalogoPeliculasImpl {
         String esperado ="Se ha borrado el catalogo de pelicula";
         System.out.println("testBorrarCatalogo");
         String opcion = "1";
-        assertEquals(esperado,catalogoPeliculas.borrarPelicula(opcion));
+        assertEquals(esperado,catalogoPeliculas.borrarPelicula(pelicula));
     }
     @Test
     public void testNoBorrarCatalogo() throws EscrituraDatosEx, LecturaDatosEx {

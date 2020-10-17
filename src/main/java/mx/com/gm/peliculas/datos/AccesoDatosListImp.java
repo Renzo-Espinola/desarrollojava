@@ -1,5 +1,6 @@
 package mx.com.gm.peliculas.datos;
 
+import mx.com.gm.peliculas.domain.IEntidadVideoClub;
 import mx.com.gm.peliculas.domain.Pelicula;
 import mx.com.gm.peliculas.domain.Socio;
 import mx.com.gm.peliculas.excepciones.AccesoDatosEx;
@@ -14,9 +15,8 @@ import java.util.List;
 public class AccesoDatosListImp implements IAccesoDatos {
     private String nombre;
     private boolean bandera = true;
-    private List<Pelicula> resguardoPelicula = new ArrayList<>();
-    private List<String> listaPelicula = new ArrayList<>();
-    private List<String> listaSocio = new ArrayList<>();
+    private List<IEntidadVideoClub> listaEntidades = new ArrayList<>();
+
     private static Logger logger = LoggerFactory.getLogger(AccesoDatosFileImpl.class);
 
     public AccesoDatosListImp(String nombre){
@@ -29,16 +29,16 @@ public class AccesoDatosListImp implements IAccesoDatos {
     }
 
     @Override
-    public List<String> listar() throws LecturaDatosEx {
+    public List<IEntidadVideoClub> listar() throws LecturaDatosEx {
 
-        return listaPelicula;
+        return listaEntidades;
     }
 
     @Override
-    public boolean escribir(String nombre, boolean anexar) throws EscrituraDatosEx {
+    public boolean escribir(IEntidadVideoClub entidad, boolean anexar) throws EscrituraDatosEx {
 
         if (nombre != "" && anexar != false) {
-            listaPelicula.add(nombre);
+            listaEntidades.add(entidad);
             return true;
         } else
             return false;
@@ -50,8 +50,8 @@ public class AccesoDatosListImp implements IAccesoDatos {
     @Override
     public boolean buscar(String buscar) throws LecturaDatosEx {
 
-        for (int i = 0; i < listaPelicula.size(); i++) {
-            if (listaPelicula.get(i).equalsIgnoreCase(buscar)) {
+        for (int i = 0; i < listaEntidades.size(); i++) {
+            if ((listaEntidades.get(i).equals(buscar))){
                 bandera = true;
                 break;
             } else bandera = false;
@@ -66,9 +66,9 @@ public class AccesoDatosListImp implements IAccesoDatos {
 
     @Override
     public boolean borrar(String opcion) throws EscrituraDatosEx, LecturaDatosEx {
-        for (int i = 0; i < listaPelicula.size(); i++) {
-            if (listaPelicula.get(i).equalsIgnoreCase(opcion)) {
-                listaPelicula.remove(i);
+        for (int i = 0; i < listaEntidades.size(); i++) {
+            if (listaEntidades.get(i).equals(opcion)) {
+                listaEntidades.remove(i);
                 bandera = true;
                 break;
             } else bandera = false;

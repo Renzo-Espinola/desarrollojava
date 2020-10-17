@@ -1,14 +1,16 @@
 package mx.com.gm.peliculas.negocio;
 
+import mx.com.gm.peliculas.domain.IEntidadVideoClub;
 import mx.com.gm.peliculas.excepciones.EscrituraDatosEx;
 import mx.com.gm.peliculas.excepciones.LecturaDatosEx;
 
+import java.io.IOException;
 import java.util.List;
 
 public interface IServicioAlquiler {
-    String agregarAlquiler (int i, String socio, List<String> pelicula) throws EscrituraDatosEx;
+    String agregarAlquiler (IEntidadVideoClub alquiler) throws EscrituraDatosEx;
 
-    String listarAlquiler()throws LecturaDatosEx;
+    void listarAlquiler() throws LecturaDatosEx, IOException;
 
     String buscarAlquiler(String buscar) throws LecturaDatosEx;
 

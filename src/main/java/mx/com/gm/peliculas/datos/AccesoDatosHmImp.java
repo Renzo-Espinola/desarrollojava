@@ -1,4 +1,6 @@
 package mx.com.gm.peliculas.datos;
+import mx.com.gm.peliculas.domain.Entidad;
+import mx.com.gm.peliculas.domain.IEntidadVideoClub;
 import mx.com.gm.peliculas.domain.Pelicula;
 import mx.com.gm.peliculas.domain.Socio;
 import mx.com.gm.peliculas.excepciones.EscrituraDatosEx;
@@ -16,6 +18,7 @@ public class AccesoDatosHmImp implements IAccesoDatos {
     private Pelicula nombrePeli = new Pelicula();
     private  Map<Integer,String> mapPelis = new HashMap<>();
     private  Map<Integer,Socio> mapSocios = new HashMap<>();
+    private List <IEntidadVideoClub> resguardoPelicula = new ArrayList<>();
     private Integer i=0;
     private boolean bandera = true;
     private String nombre;
@@ -42,17 +45,17 @@ public class AccesoDatosHmImp implements IAccesoDatos {
 
 
     @Override
-    public  List<String> listar ()throws LecturaDatosEx {
+    public  List<IEntidadVideoClub> listar ()throws LecturaDatosEx {
 
-        List<String> resguardoPelicula = new ArrayList<>(mapPelis.values());
+      resguardoPelicula.add((IEntidadVideoClub) mapPelis.values());
 
                 return resguardoPelicula;
 
     }
 
     @Override
-    public boolean escribir(String nombre , boolean anexar) throws EscrituraDatosEx {
-         if(nombre!="" &&anexar!=false){
+    public boolean escribir(IEntidadVideoClub entidad , boolean anexar) throws EscrituraDatosEx {
+         if(entidad !=null &&anexar!=false){
 
              mapPelis.put(i,nombre);
            i++;

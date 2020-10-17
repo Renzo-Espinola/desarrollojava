@@ -2,26 +2,22 @@ package mx.com.gm.peliculas.domain;
 
 import java.util.List;
 
-public class Alquiler extends Entidad{
-    private  int id;
+public class Alquiler implements IEntidadVideoClub{
+
     private String nombreSocio;
-    private List<String> peliculasAlquiladas;
+    private List<IEntidadVideoClub> peliculasAlquiladas;
 
 
     public Alquiler(){};
 
-    public Alquiler (int id, String nombreSocio, List<String> peliculasAlquiladas){
-        super(id);
+    public Alquiler (String nombreSocio, List<IEntidadVideoClub> peliculasAlquiladas){
         this.nombreSocio=nombreSocio;
         this.peliculasAlquiladas=peliculasAlquiladas;
     }
 
-    @Override
     public String toString() {
-        return "Alquiler{" +
-                "id=" + id +
-                ", nombreSocio='" + nombreSocio + '\'' +
-                ", peliculasAlquiladas=" + peliculasAlquiladas +
-                '}';
+        return "Alquiler["+
+                "nombre Socio= "+ nombreSocio +
+                ", peliculasAlquiladas= " + peliculasAlquiladas +" ]";
     }
 }

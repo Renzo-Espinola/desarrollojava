@@ -2,6 +2,7 @@ package mx.com.gm.peliculas.test;
 import mx.com.gm.peliculas.config.Configuracion;
 import mx.com.gm.peliculas.datos.AccesoDatosFileImpl;
 import mx.com.gm.peliculas.datos.IAccesoDatos;
+import mx.com.gm.peliculas.domain.IEntidadVideoClub;
 import mx.com.gm.peliculas.domain.Pelicula;
 import mx.com.gm.peliculas.excepciones.EscrituraDatosEx;
 import mx.com.gm.peliculas.excepciones.LecturaDatosEx;
@@ -18,21 +19,22 @@ class AccesoDatosImplTest extends AccesoDatosFileImpl {
     File archivo = new File ("src\\main\\resources\\peliculas.txt");
     String nombreArchivo= archivo.getAbsolutePath();
     IAccesoDatos accesoDatos;
-    String peli;
+    IEntidadVideoClub peli;
+    String esperado;
     String conf = Configuracion.FILE_CAT_PELICULA;
 
     @BeforeEach
     public void before() {
         System.out.println("BEFORE");
         accesoDatos = new AccesoDatosFileImpl(nombreArchivo);
-        peli = "xFiles";
+        peli = new Pelicula("xfile");
+        esperado = ("HEMAN");
 
     }
 
     @Test
     public void testBuscarPeliculaEncontrada() throws LecturaDatosEx {
         System.out.println("testBuscarEncontrar");
-        String esperado = "batman";
         assertThat(accesoDatos.buscar(esperado))
                 .isTrue();
     }
@@ -40,7 +42,6 @@ class AccesoDatosImplTest extends AccesoDatosFileImpl {
     @Test
     public void testBuscarPeliculaNoEncontrada() throws LecturaDatosEx {
         System.out.println("testBuscarPeliculaNoEncontrada");
-        String esperado = "HEMAN";
         assertThat(accesoDatos.buscar(esperado))
                 .isTrue();
     }
@@ -72,9 +73,8 @@ class AccesoDatosImplTest extends AccesoDatosFileImpl {
     public void testBorrarPelicula() throws EscrituraDatosEx,LecturaDatosEx {
         System.out.println("testBorrarPelicula");
         List<Pelicula> pelicula= new ArrayList<>();
-        pelicula.add(new Pelicula("batman"));
-        String opcion = "batman";
-        assertThat(accesoDatos.borrar(opcion))
+        String peli="batman";
+        assertThat(accesoDatos.borrar(peli))
                 .isTrue();
 
     }
@@ -82,9 +82,8 @@ class AccesoDatosImplTest extends AccesoDatosFileImpl {
     public void testNoBorrarPelicula() throws EscrituraDatosEx,LecturaDatosEx {
         System.out.println("testNoBorrarPelicula");
         List<Pelicula> pelicula= new ArrayList<>();
-        pelicula.add(new Pelicula("batman"));
-        String opcion = "batman";
-        assertThat(accesoDatos.borrar(opcion))
+        String peli = "batman";
+        assertThat(accesoDatos.borrar(peli))
                 .isFalse();
 
     }

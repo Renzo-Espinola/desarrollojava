@@ -1,16 +1,18 @@
 package mx.com.gm.peliculas.datos;
 
 import mx.com.gm.peliculas.domain.Alquiler;
+import mx.com.gm.peliculas.domain.IEntidadVideoClub;
 import mx.com.gm.peliculas.excepciones.EscrituraDatosEx;
 import mx.com.gm.peliculas.excepciones.LecturaDatosEx;
 
+import java.io.IOException;
 import java.util.List;
 
 public interface IAccesoDatosAlquiler {
 
-    Alquiler listarAlquiler() throws LecturaDatosEx;
+    IEntidadVideoClub listarAlquiler() throws LecturaDatosEx, IOException;
 
-    boolean escribirAlquiler(int i, String nombre,List<String> pelicula, boolean anexar) throws EscrituraDatosEx;
+    boolean escribirAlquiler(IEntidadVideoClub alquiler, boolean anexar) throws EscrituraDatosEx;
 
     boolean buscarAlquiler(String buscar) throws LecturaDatosEx;
 

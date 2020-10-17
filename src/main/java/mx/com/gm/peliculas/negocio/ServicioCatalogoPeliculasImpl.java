@@ -2,6 +2,7 @@ package mx.com.gm.peliculas.negocio;
 
 
 import mx.com.gm.peliculas.config.Configuracion;
+import mx.com.gm.peliculas.domain.IEntidadVideoClub;
 import mx.com.gm.peliculas.domain.Pelicula;
 import mx.com.gm.peliculas.excepciones.*;
 import mx.com.gm.peliculas.datos.*;
@@ -25,17 +26,17 @@ public class ServicioCatalogoPeliculasImpl implements IServicioCatalogoPeliculas
 
     public ServicioCatalogoPeliculasImpl() {
          //catalogoPelicula = new AccesoDatosListImp(nombre);
-        catalogoPelicula = new AccesoDatosHmImp(nombre);
-        //catalogoPelicula = new AccesoDatosFileImpl(Configuracion.getInstance().getProperty(Configuracion.FILE_CAT_PELICULA));
+        //catalogoPelicula = new AccesoDatosHmImp(nombre);
+        catalogoPelicula = new AccesoDatosFileImpl(Configuracion.getInstance().getProperty(Configuracion.FILE_CAT_PELICULA));
 
     }
 
     @Override
-    public String agregarPelicula(String pelicula, boolean bandera) throws EscrituraDatosEx {
+    public String agregarPelicula(IEntidadVideoClub entidad, boolean bandera) throws EscrituraDatosEx {
 
        /* Pelicula pelicula1 = new Pelicula(pelicula);
         String peli = pelicula1.getNombre();*/
-        if (catalogoPelicula.escribir(pelicula, bandera) == true) {
+        if (catalogoPelicula.escribir(entidad, bandera) == true) {
             return ( "Se ha agregado ");
 
         } else {
@@ -48,7 +49,7 @@ public class ServicioCatalogoPeliculasImpl implements IServicioCatalogoPeliculas
     public String listarPeliculas() throws LecturaDatosEx {
         int i = 0;
         int j = 1;
-        //catalogo.listar(nombreArchivo);
+
         System.out.println("LISTADO DE PELICULAS");
 
         Iterator iter = catalogoPelicula.listar().iterator();
@@ -86,10 +87,10 @@ public class ServicioCatalogoPeliculasImpl implements IServicioCatalogoPeliculas
 
 
     @Override
-    public String borrarPelicula(String opcion) throws EscrituraDatosEx, LecturaDatosEx {
+    public String borrarPelicula(String borrar) throws EscrituraDatosEx, LecturaDatosEx {
         String resp= "";
-        if (opcion!=""){
-        catalogoPelicula.borrar(opcion);
+        if (borrar!=null){
+        catalogoPelicula.borrar(borrar);
         resp=("Se ha borrado el catalogo de pelicula");
             } else {
             resp = ("Se produjo un error en el  borrado del catalogo");

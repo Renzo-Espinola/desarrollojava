@@ -8,7 +8,7 @@ import java.io.Serializable;
 
 @Getter @Setter
 
-public class Pelicula {
+public class Pelicula implements IEntidadVideoClub{
     private String nombre;
     private int numero;
 
@@ -19,27 +19,10 @@ public class Pelicula {
         this.nombre=nombre;
     }
 
-    /*public String getNombre() {
-        return nombre;
-    }
-
-    public int getNumero() {
-        return numero;
-    }
-
-    public void setNumero(int numero) {
-        this.numero = numero;
-    }
-
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }*/
-
     @Override
     public String toString() {
-        return "Pelicula{" +
-                "nombre='" + nombre + '\'' +
-                ", numero=" + numero +
-                '}';
+        return "Pelicula[ " +
+        "nombre= " + nombre +
+                "]" ;
     }
 }

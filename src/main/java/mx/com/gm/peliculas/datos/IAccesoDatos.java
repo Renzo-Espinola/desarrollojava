@@ -1,5 +1,6 @@
 package mx.com.gm.peliculas.datos;
 
+import mx.com.gm.peliculas.domain.IEntidadVideoClub;
 import mx.com.gm.peliculas.domain.Pelicula;
 import mx.com.gm.peliculas.domain.Socio;
 import mx.com.gm.peliculas.excepciones.EscrituraDatosEx;
@@ -12,15 +13,15 @@ public interface IAccesoDatos {
 
     boolean existe() throws LecturaDatosEx;
 
-    List<String> listar() throws LecturaDatosEx;
+    List<IEntidadVideoClub> listar() throws LecturaDatosEx;
 
-    boolean escribir(String nombre, boolean anexar) throws EscrituraDatosEx;
+    boolean escribir(IEntidadVideoClub entidad, boolean anexar) throws EscrituraDatosEx;
 
     boolean buscar(String buscar) throws LecturaDatosEx;
 
     boolean crear() throws EscrituraDatosEx;
 
-    boolean borrar(String opcion) throws EscrituraDatosEx, LecturaDatosEx;
+    boolean borrar(String borrar) throws EscrituraDatosEx, LecturaDatosEx;
 
    /* boolean agregarSocio(Socio socio,boolean anexar) throws EscrituraDatosEx;
 

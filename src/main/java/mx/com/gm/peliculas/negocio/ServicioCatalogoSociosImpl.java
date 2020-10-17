@@ -23,15 +23,15 @@ public class ServicioCatalogoSociosImpl implements  IServicioCatalogoSocios{
 
     public ServicioCatalogoSociosImpl() {
         //catalogo= new AccesoDatosListImp(nombre);
-        catalogo= new AccesoDatosHmImp(nombre);
-        //catalogo= new AccesoDatosFileImpl(Configuracion.getInstance().getProperty(Configuracion.FILE_SOCIO));
+       // catalogo= new AccesoDatosHmImp(nombre);
+        catalogo= new AccesoDatosFileImpl(Configuracion.getInstance().getProperty(Configuracion.FILE_SOCIO));
     }
 
     @Override
     public String agregarSocio(String socio) throws EscrituraDatosEx {
         Socio socio1 = new Socio(socio);
-        String socio2=socio1.getNombre();
-        if (catalogo.escribir(socio2,true) == true) {
+        //String socio2=socio1.getNombre();
+        if (catalogo.escribir(socio1,true) == true) {
             return ( "Se ha agregado ");
 
         } else {
@@ -58,6 +58,7 @@ public class ServicioCatalogoSociosImpl implements  IServicioCatalogoSocios{
 
     @Override
     public String buscarSocio(String buscar) throws LecturaDatosEx {
+
         if (catalogo.buscar(buscar) == true) {
             return ("el usuario se encuentra guardado ");
         }else{
@@ -69,8 +70,9 @@ public class ServicioCatalogoSociosImpl implements  IServicioCatalogoSocios{
     @Override
     public String borrarSocio(String opcion) throws EscrituraDatosEx,LecturaDatosEx {
         String resp= "";
+        Socio socio = new Socio(opcion);
         if (opcion!=""){
-            catalogo.borrar(opcion);
+            catalogo.borrar(socio.getNombre());
             resp=("Se ha borrado el catalogo de pelicula");
         } else {
             resp = ("Se produjo un error en el  borrado del catalogo");

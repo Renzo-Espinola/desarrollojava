@@ -17,10 +17,10 @@ import mx.com.gm.peliculas.config.*;
 
 public class AccesoDatosFileImpl implements IAccesoDatos {
 
-    private List<Pelicula> listaPelicula = new ArrayList<>();
-    private List<Socio> listaSocio = new ArrayList<>();
+
     private static Logger logger = LoggerFactory.getLogger(AccesoDatosFileImpl.class);
     private String nombreArchivo;
+    private IEntidadVideoClub pelicula;
     String fileoutPelicula = Configuracion.getInstance().getProperty(Configuracion.FILE_CAT_PElIC_OUT);
     String fileOutSocio = Configuracion.getInstance().getProperty((Configuracion.FILE_SOCIO_OUT));
 
@@ -63,16 +63,17 @@ public class AccesoDatosFileImpl implements IAccesoDatos {
     }
 
     @Override
-    public List<String> listar() throws LecturaDatosEx {
-        List<String> listaPeliculas = new ArrayList<>();
+    public List<IEntidadVideoClub> listar() throws LecturaDatosEx {
+        List<IEntidadVideoClub> listaPeliculas = new ArrayList<>();
 
         try {
             var entrada = new BufferedReader(new FileReader(nombreArchivo));
             var lectura = entrada.readLine();
             while (lectura != null) {
                 String peli = lectura;
+                pelicula=new Pelicula(peli);
                 lectura = entrada.readLine();
-                listaPeliculas.add(peli);
+                listaPeliculas.add(pelicula);
             }
             entrada.close();
         } catch (FileNotFoundException ex) {
@@ -87,13 +88,13 @@ public class AccesoDatosFileImpl implements IAccesoDatos {
 
 
     @Override
-    public boolean escribir(String nombre, boolean anexar) throws EscrituraDatosEx {
+    public boolean escribir(IEntidadVideoClub entidad, boolean anexar) throws EscrituraDatosEx {
 
         try {
             if (nombreArchivo != "" && anexar != false) {
                 PrintWriter salida = new PrintWriter(new FileWriter(nombreArchivo, anexar));
                 //listaPelicula.add(pelicula);
-                salida.println(nombre);
+                salida.println(entidad);
                 salida.close();
                 return true;
             } else return false;

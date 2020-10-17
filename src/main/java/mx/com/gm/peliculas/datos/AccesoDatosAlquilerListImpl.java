@@ -1,6 +1,7 @@
 package mx.com.gm.peliculas.datos;
 
 import mx.com.gm.peliculas.domain.Alquiler;
+import mx.com.gm.peliculas.domain.IEntidadVideoClub;
 import mx.com.gm.peliculas.domain.Pelicula;
 import mx.com.gm.peliculas.excepciones.EscrituraDatosEx;
 import mx.com.gm.peliculas.excepciones.LecturaDatosEx;
@@ -8,31 +9,28 @@ import mx.com.gm.peliculas.excepciones.LecturaDatosEx;
 import java.util.List;
 
 
-public class AccesoDatosAlquiler implements IAccesoDatosAlquiler {
+public class AccesoDatosAlquilerListImpl implements IAccesoDatosAlquiler {
 private String nombre;
 private List<String> listaPelicula;
-private Alquiler alquilerPelicula;
+private IEntidadVideoClub alquilerPelicula;
 
-public AccesoDatosAlquiler(){};
+public AccesoDatosAlquilerListImpl(){};
 
 
-public AccesoDatosAlquiler (String nombre){
+public AccesoDatosAlquilerListImpl(String nombre){
     this.nombre=nombre;
 }
 
     @Override
-    public Alquiler listarAlquiler() throws LecturaDatosEx {
+    public IEntidadVideoClub listarAlquiler() throws LecturaDatosEx {
        return alquilerPelicula;
     }
 
     @Override
-    public boolean escribirAlquiler(int i, String nombre,List<String> pelicula, boolean anexar) throws EscrituraDatosEx {
-        if (nombre != "" && pelicula!= null && anexar != false) {
-            alquilerPelicula = new Alquiler(i,nombre,pelicula);
-            return true;
-        } else
-            return false;
+    public boolean escribirAlquiler(IEntidadVideoClub alquiler, boolean anexar) throws EscrituraDatosEx {
 
+            alquilerPelicula = alquiler;
+            return true;
 
     }
 
