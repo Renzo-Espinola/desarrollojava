@@ -25,9 +25,9 @@ public class ServicioCatalogoPeliculasImpl implements IServicioCatalogoPeliculas
     private static Logger logger = LoggerFactory.getLogger(ServicioCatalogoPeliculasImpl.class);
 
     public ServicioCatalogoPeliculasImpl() {
-         //catalogoPelicula = new AccesoDatosListImp(nombre);
+         catalogoPelicula = new AccesoDatosListImp(nombre);
         //catalogoPelicula = new AccesoDatosHmImp(nombre);
-        catalogoPelicula = new AccesoDatosFileImpl(Configuracion.getInstance().getProperty(Configuracion.FILE_CAT_PELICULA));
+        //catalogoPelicula = new AccesoDatosFileImpl(Configuracion.getInstance().getProperty(Configuracion.FILE_CAT_PELICULA));
 
     }
 

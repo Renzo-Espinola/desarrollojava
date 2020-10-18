@@ -17,7 +17,7 @@ public class Socio implements  IEntidadVideoClub{
 
     @Override
     public String toString() {
-        return "Socio [nombre" + nombre + "]";
+        return "Socio [nombre: " + nombre + " ]";
     }
 }
 

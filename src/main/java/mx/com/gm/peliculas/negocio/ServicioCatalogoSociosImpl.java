@@ -22,9 +22,9 @@ public class ServicioCatalogoSociosImpl implements  IServicioCatalogoSocios{
     private static Logger logger = LoggerFactory.getLogger(ServicioCatalogoPeliculasImpl.class);
 
     public ServicioCatalogoSociosImpl() {
-        //catalogo= new AccesoDatosListImp(nombre);
+        catalogo= new AccesoDatosListImp(nombre);
        // catalogo= new AccesoDatosHmImp(nombre);
-        catalogo= new AccesoDatosFileImpl(Configuracion.getInstance().getProperty(Configuracion.FILE_SOCIO));
+        //catalogo= new AccesoDatosFileImpl(Configuracion.getInstance().getProperty(Configuracion.FILE_SOCIO));
     }
 
     @Override

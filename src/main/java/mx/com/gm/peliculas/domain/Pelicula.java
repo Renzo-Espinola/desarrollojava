@@ -23,6 +23,6 @@ public class Pelicula implements IEntidadVideoClub{
     public String toString() {
         return "Pelicula[ " +
         "nombre= " + nombre +
-                "]" ;
+                " ]" ;
     }
 }

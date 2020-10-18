@@ -22,9 +22,9 @@ public class ServicioAlquilerImpl implements IServicioAlquiler {
     private String nombre;
     Alquiler peliculaAlquilada;
     public ServicioAlquilerImpl(){
-             //catalogo= new AccesoDatosAlquilerListImpl(nombre);
+             catalogo= new AccesoDatosAlquilerListImpl(nombre);
             //catalogo= new AccesoDatosHmImp(nombre);
-            catalogo= new AccesoDatosAlquilerFile(Configuracion.getInstance().getProperty(Configuracion.FILE_ALQUILER));
+            //catalogo= new AccesoDatosAlquilerFile(Configuracion.getInstance().getProperty(Configuracion.FILE_ALQUILER));
 
     }
     @Override
@@ -44,7 +44,7 @@ public class ServicioAlquilerImpl implements IServicioAlquiler {
         //catalogo.listar(nombreArchivo);
         System.out.println("LISTADO DE ALQUILERES");
         catalogo.listarAlquiler();
-      /* Gson gson = new Gson();
+       Gson gson = new Gson();
        //final Alquiler alquiler2 = catalogo.listarAlquiler();
        String mostrar2 =gson.toJson(catalogo.listarAlquiler());
 
@@ -55,7 +55,7 @@ public class ServicioAlquilerImpl implements IServicioAlquiler {
        System.out.println(mostrar);
         System.out.println("");
         System.out.println("--FORMA 2--");
-       return mostrar2;*/
+       //return mostrar2;
 
     }
 

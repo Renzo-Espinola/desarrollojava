@@ -11,7 +11,7 @@ import java.util.List;
 
 public class AccesoDatosAlquilerListImpl implements IAccesoDatosAlquiler {
 private String nombre;
-private List<String> listaPelicula;
+//private List<String> listaPelicula;
 private IEntidadVideoClub alquilerPelicula;
 
 public AccesoDatosAlquilerListImpl(){};

@@ -1,5 +1,6 @@
 package mx.com.gm.peliculas.presentacion;
 
+import com.google.gson.stream.JsonToken;
 import mx.com.gm.peliculas.excepciones.EscrituraDatosEx;
 import mx.com.gm.peliculas.excepciones.LecturaDatosEx;
 
@@ -61,11 +62,11 @@ public class PresSelecSeccion {
                     opcion = scanner.nextInt();
                     switch (opcion) {
                         case 1:
-                            seccSocios.agregarSocios();
+                            System.out.println(seccSocios.agregarSocios());
                             System.out.println("");
                             break;
                         case 2:
-                            seccSocios.listarSocio();
+                            System.out.println(seccSocios.listarSocio());
                             System.out.println("");
                             break;
                         case 3:
