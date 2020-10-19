@@ -22,8 +22,8 @@ public AccesoDatosAlquilerListImpl(String nombre){
 }
 
     @Override
-    public IEntidadVideoClub listarAlquiler() throws LecturaDatosEx {
-       return alquilerPelicula;
+    public List<Alquiler> listarAlquiler() throws LecturaDatosEx {
+       return null;
     }
 
     @Override

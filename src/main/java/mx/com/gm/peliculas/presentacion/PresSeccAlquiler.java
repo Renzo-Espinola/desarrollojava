@@ -1,5 +1,6 @@
 package mx.com.gm.peliculas.presentacion;
 
+import java.sql.SQLOutput;
 import java.util.Scanner;
 
 import mx.com.gm.peliculas.datos.AccesoDatosAlquilerFile;
@@ -46,16 +47,15 @@ public class PresSeccAlquiler {
                 System.out.println("Ingrese la pelicula");
                 nombreAlquiler = scanner.next();
                  listaPelicula.add(new Pelicula(nombreAlquiler));
-                System.out.println(servicioAlquiler.agregarAlquiler (new Alquiler(nombreSocio,listaPelicula)));
                 System.out.println(" ");
                 System.out.println("desea continuar ");
                 resp = scanner.next();
             }
-
+            System.out.println(servicioAlquiler.agregarAlquiler (new Alquiler(nombreSocio,listaPelicula)));
         }
     }
     public void listarAlquiler() throws LecturaDatosEx, IOException {
-        servicioAlquiler.listarAlquiler();
+        System.out.println(servicioAlquiler.listarAlquiler());
     }
     public String  buscarAlquiler() throws LecturaDatosEx {
         System.out.println("Ingrese el nombre de la Pelicula ");

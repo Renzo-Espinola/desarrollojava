@@ -35,15 +35,13 @@ public class AccesoDatosAlquilerFile implements IAccesoDatosAlquiler {
 
 
     @Override
-    public Alquiler listarAlquiler() throws LecturaDatosEx, IOException {
-
+    public List<Alquiler> listarAlquiler() throws LecturaDatosEx, IOException {
+        Type tipoAlquiler = new TypeToken<List<Alquiler>>(){}.getType();
 
         Gson gson = new Gson();
        JsonReader reader = new JsonReader(new FileReader(nombreArchivo));
-       Alquiler datos;
-        Alquiler[] reviews = new Gson().fromJson(reader, Alquiler[].class);
-       datos = reviews[0];
-        return datos;
+        List<Alquiler> listaAlquileres = new Gson().fromJson(reader,tipoAlquiler);
+          return listaAlquileres;
     }
 
     @Override
@@ -56,8 +54,8 @@ public class AccesoDatosAlquilerFile implements IAccesoDatosAlquiler {
 
                 FileWriter salida = new FileWriter(nombreArchivo, anexar);
                 //salida.append((CharSequence) alquiler);
-
-                gson.toJson(alquiler,salida);
+                Alquiler alquilerLocal= (Alquiler) alquiler;
+                gson.toJson(alquilerLocal,salida);
                 salida.flush();
                 salida.close();
                 return true;

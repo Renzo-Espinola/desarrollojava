@@ -40,10 +40,10 @@ public class ServicioAlquilerImpl implements IServicioAlquiler {
     }
 
     @Override
-    public void listarAlquiler() throws LecturaDatosEx, IOException {
+    public List<Alquiler> listarAlquiler() throws LecturaDatosEx, IOException {
         //catalogo.listar(nombreArchivo);
         System.out.println("LISTADO DE ALQUILERES");
-        catalogo.listarAlquiler();
+        /*catalogo.listarAlquiler();
        Gson gson = new Gson();
        //final Alquiler alquiler2 = catalogo.listarAlquiler();
        String mostrar2 =gson.toJson(catalogo.listarAlquiler());
@@ -55,8 +55,8 @@ public class ServicioAlquilerImpl implements IServicioAlquiler {
        System.out.println(mostrar);
         System.out.println("");
         System.out.println("--FORMA 2--");
-       //return mostrar2;
-
+       //return mostrar2;*/
+       return catalogo.listarAlquiler();
     }
 
 

@@ -10,7 +10,7 @@ import java.util.List;
 
 public interface IAccesoDatosAlquiler {
 
-    IEntidadVideoClub listarAlquiler() throws LecturaDatosEx, IOException;
+    List <Alquiler> listarAlquiler() throws LecturaDatosEx, IOException;
 
     boolean escribirAlquiler(IEntidadVideoClub alquiler, boolean anexar) throws EscrituraDatosEx;
 
