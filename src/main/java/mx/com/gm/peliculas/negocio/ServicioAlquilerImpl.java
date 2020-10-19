@@ -22,9 +22,9 @@ public class ServicioAlquilerImpl implements IServicioAlquiler {
     private String nombre;
     Alquiler peliculaAlquilada;
     public ServicioAlquilerImpl(){
-             catalogo= new AccesoDatosAlquilerListImpl(nombre);
+             //catalogo= new AccesoDatosAlquilerListImpl(nombre);
             //catalogo= new AccesoDatosHmImp(nombre);
-            //catalogo= new AccesoDatosAlquilerFile(Configuracion.getInstance().getProperty(Configuracion.FILE_ALQUILER));
+            catalogo= new AccesoDatosAlquilerFile(Configuracion.getInstance().getProperty(Configuracion.FILE_ALQUILER));
 
     }
     @Override

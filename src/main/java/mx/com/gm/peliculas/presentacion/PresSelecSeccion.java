@@ -70,7 +70,7 @@ public class PresSelecSeccion {
                             System.out.println("");
                             break;
                         case 3:
-                            seccSocios.buscarSocio();
+                            System.out.println(seccSocios.buscarSocio());
                             System.out.println("");
                             break;
                         case 4:

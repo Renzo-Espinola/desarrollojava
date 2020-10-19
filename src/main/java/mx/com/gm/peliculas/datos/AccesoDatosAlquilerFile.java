@@ -3,13 +3,16 @@ package mx.com.gm.peliculas.datos;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonSyntaxException;
+import com.google.gson.reflect.TypeToken;
 import com.google.gson.stream.JsonReader;
 import mx.com.gm.peliculas.domain.Alquiler;
 import mx.com.gm.peliculas.domain.IEntidadVideoClub;
 import mx.com.gm.peliculas.excepciones.EscrituraDatosEx;
 import mx.com.gm.peliculas.excepciones.LecturaDatosEx;
 
+import java.awt.*;
 import java.io.*;
+import java.lang.reflect.Type;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
@@ -24,7 +27,8 @@ public class AccesoDatosAlquilerFile implements IAccesoDatosAlquiler {
     private List <IEntidadVideoClub> alquilerPelicula;
     IEntidadVideoClub alquiler;
 
-   public AccesoDatosAlquilerFile(){}
+
+    public AccesoDatosAlquilerFile(){}
     public  AccesoDatosAlquilerFile(String nombreArchivo){
         this.nombreArchivo=nombreArchivo;
     }
@@ -32,33 +36,29 @@ public class AccesoDatosAlquilerFile implements IAccesoDatosAlquiler {
 
     @Override
     public Alquiler listarAlquiler() throws LecturaDatosEx, IOException {
-       Gson gson = new GsonBuilder().create();
-       JsonReader reader= new JsonReader(new FileReader(nombreArchivo));
-       Alquiler alquileres =gson.fromJson(reader,Alquiler.class);
-
-       return alquileres;
 
 
-       /*Scanner input = new Scanner(new File(nombreArchivo));
-        input.useDelimiter("-|\n");
-        Alquiler[] alquileres = new Alquiler[0];
-        while (input.hasNext()) {
-        String nombre = input.next();
-        List<IEntidadVideoClub> pelicula =null;
-        pelicula.add();
-        alquiler=new Alquiler(nombre,pelicula);
-        }*/
-
+        Gson gson = new Gson();
+       JsonReader reader = new JsonReader(new FileReader(nombreArchivo));
+       Alquiler datos;
+        Alquiler[] reviews = new Gson().fromJson(reader, Alquiler[].class);
+       datos = reviews[0];
+        return datos;
     }
 
     @Override
     public boolean escribirAlquiler(IEntidadVideoClub alquiler, boolean anexar) throws EscrituraDatosEx {
-        try {
+       //Type tipoDeDatos = new TypeToken<List<IEntidadVideoClub>>(){}.getType();
+        Gson gson = new GsonBuilder().create();
+        //String json = gson.toJson(alquiler,);
+       try {
             if (nombreArchivo != "" && anexar != false) {
-                Gson gson = new Gson();
-                PrintWriter salida = new PrintWriter(new FileWriter(nombreArchivo, anexar));
+
+                FileWriter salida = new FileWriter(nombreArchivo, anexar);
+                //salida.append((CharSequence) alquiler);
+
                 gson.toJson(alquiler,salida);
-                salida.println();
+                salida.flush();
                 salida.close();
                 return true;
             } else return false;
@@ -78,4 +78,8 @@ public class AccesoDatosAlquilerFile implements IAccesoDatosAlquiler {
     public boolean borrarAlquiler(String opcion) throws EscrituraDatosEx, LecturaDatosEx {
         return false;
     }
+
+
+
+
 }
