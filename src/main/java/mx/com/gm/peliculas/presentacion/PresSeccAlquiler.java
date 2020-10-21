@@ -3,6 +3,8 @@ package mx.com.gm.peliculas.presentacion;
 import java.sql.SQLOutput;
 import java.util.Scanner;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import mx.com.gm.peliculas.datos.AccesoDatosAlquilerFile;
 import mx.com.gm.peliculas.datos.AccesoDatosAlquilerListImpl;
 import mx.com.gm.peliculas.datos.IAccesoDatos;
@@ -25,7 +27,7 @@ public class PresSeccAlquiler {
     IServicioCatalogoPeliculas servicioCatalogoPeliculas= new ServicioCatalogoPeliculasImpl();
 
     Scanner scanner= new Scanner(System.in);
-    List<IEntidadVideoClub> listaPelicula = new ArrayList<>();
+    List<Pelicula> listaPelicula = new ArrayList<>();
     IEntidadVideoClub alquilerNuevo;
     String nombreAlquiler;
 
@@ -55,7 +57,9 @@ public class PresSeccAlquiler {
         }
     }
     public void listarAlquiler() throws LecturaDatosEx, IOException {
-        System.out.println(servicioAlquiler.listarAlquiler());
+        Gson mostrarOrdenado = new GsonBuilder().setPrettyPrinting().create();
+        String mostrar = mostrarOrdenado.toJson(servicioAlquiler.listarAlquiler());
+        System.out.println(mostrar);
     }
     public String  buscarAlquiler() throws LecturaDatosEx {
         System.out.println("Ingrese el nombre de la Pelicula ");

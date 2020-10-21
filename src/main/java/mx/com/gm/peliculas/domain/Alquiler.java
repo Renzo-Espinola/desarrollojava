@@ -5,12 +5,12 @@ import java.util.List;
 public class Alquiler implements IEntidadVideoClub{
 
     private String nombreSocio;
-    private List<IEntidadVideoClub> peliculasAlquiladas;
+    private List<Pelicula> peliculasAlquiladas;
 
 
     public Alquiler(){};
 
-    public Alquiler (String nombreSocio, List<IEntidadVideoClub> peliculasAlquiladas){
+    public Alquiler (String nombreSocio, List<Pelicula> peliculasAlquiladas){
         this.nombreSocio=nombreSocio;
         this.peliculasAlquiladas=peliculasAlquiladas;
     }

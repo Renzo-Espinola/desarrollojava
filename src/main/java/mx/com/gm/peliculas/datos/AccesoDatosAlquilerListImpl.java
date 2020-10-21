@@ -6,13 +6,14 @@ import mx.com.gm.peliculas.domain.Pelicula;
 import mx.com.gm.peliculas.excepciones.EscrituraDatosEx;
 import mx.com.gm.peliculas.excepciones.LecturaDatosEx;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
 public class AccesoDatosAlquilerListImpl implements IAccesoDatosAlquiler {
 private String nombre;
 //private List<String> listaPelicula;
-private IEntidadVideoClub alquilerPelicula;
+List<Alquiler> alquilerPelicula;
 
 public AccesoDatosAlquilerListImpl(){};
 
@@ -23,13 +24,15 @@ public AccesoDatosAlquilerListImpl(String nombre){
 
     @Override
     public List<Alquiler> listarAlquiler() throws LecturaDatosEx {
-       return null;
+       return alquilerPelicula;
     }
 
     @Override
     public boolean escribirAlquiler(IEntidadVideoClub alquiler, boolean anexar) throws EscrituraDatosEx {
-
-            alquilerPelicula = alquiler;
+            Alquiler alquilerLocal = ((Alquiler) alquiler);
+            List<Alquiler>resguardo = new ArrayList<>();
+            resguardo.add(alquilerLocal);
+            alquilerPelicula=resguardo;
             return true;
 
     }
