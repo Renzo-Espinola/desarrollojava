@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/")
+@RequestMapping("/api/clientes")
 public class AlumnoController {
 
     @Autowired
@@ -26,7 +26,7 @@ public class AlumnoController {
 
     //suministramos la ruta que vamos a buscar por ID (ruta variable)
     @GetMapping("/{id}")
-    public ResponseEntity<?> ver(@PathVariable String id) {
+    public ResponseEntity<?> ver(@PathVariable Long id) {
         Optional<Alumno> o = service.findById(id);
         if (o.isEmpty()) {
             //si esta vacio devuelve not found
